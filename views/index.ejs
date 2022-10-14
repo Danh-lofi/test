@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container mt-3">
+        <a href="add"><button type="button" class="btn btn-primary" value="">Thêm</button></a>
+
+        <h2 class="text-primary my-4">Danh sách các bài báo</h2>
+        <form action="/delete" method="POST" enctype="multipart/form-data">
+            <button type="submit" class="btn btn-primary">Delete</button>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">STT</th>
+                        <th scope="col">Tên bài báo</th>
+                        <th scope="col">Tên nhóm tác giả</th>
+                        <th scope="col">Chỉ số ISBN</th>
+                        <th scope="col">Số trang</th>
+                        <th scope="col">Năm xuất bản</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let i=0;i< papers.length;i++){%>
+                        <tr>
+                            <th scope="row text-center">
+                                <input type="checkbox" class="form-check-input" name="<%=papers[i].id%>">
+                            </th>
+                            <th scope="row text-center">
+                                <%=i+1%>
+                            </th>
+                            <th scope="row">
+                                <%=papers[i].tenBaiBao%>
+                            </th>
+                            <th scope="row">
+                                <%=papers[i].tenNhomTG%>
+                            </th>
+                            <th scope="row">
+                                <%=papers[i].chiSoTSBN%>
+                            </th>
+                            <th scope="row">
+                                <%=papers[i].soTrang%>
+                            </th>
+                            <th scope="row">
+                                <%=papers[i].namXB%>
+                            </th>
+
+                        </tr>
+                        <%}%>
+                </tbody>
+            </table>
+        </form>
+
+
+    </div>
+
+</body>
+
+</html>

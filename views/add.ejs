@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container mt-3">
+        <a href="/"><button type="button" class="btn btn-primary mb-4" value="">Danh Sách</button></a>
+
+        <form class="container mb-3" action="/" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="tenBaiBao" class="form-label">Tên bài báo</label>
+                <input id="tenBaiBao" type="text" class="form-control" name="tenBaiBao">
+                <span class="" id="errBaiBao"></span>
+            </div>
+            <div class="mb-3">
+                <label for="tenNhomTG" class="form-label">Tên nhóm tác giả</label>
+                <input id="tenNhomTG" type="text" class="form-control" name="tenNhomTG">
+                <span class="" id="errNhomTG"></span>
+            </div>
+            <div class="mb-3">
+                <label for="chiSo" class="form-label">Chỉ số ISBN</label>
+                <input id="chiSoTSBN" type="text" class="form-control" name="chiSoTSBN">
+                <span class="" id="errChiSo"></span>
+            </div>
+            <div class="mb-3">
+                <label for="soTrang" class="form-label">Số trang</label>
+                <input id="soTrang" type="text" class="form-control" name="soTrang">
+                <span class="" id="errSoTrang"></span>
+            </div>
+            <div class="mb-3">
+                <label for="namXB" class="form-label">Năm xuất bản</label>
+                <input id="namXB" type="text" class="form-control" name="namXB">
+                <span class="" id="errNamXB"></span>
+            </div>
+            <button type="submit" class="btn btn-primary" id="submit" disabled>Submit</button>
+        </form>
+
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        
+        
+        const btnSubmit = document.getElementById('submit')
+        const tenBaiBao = document.getElementById('tenBaiBao')
+        const tenNTG = document.getElementById('tenNhomTG')
+        const chiSo = document.getElementById('chiSoTSBN')
+        const soTrang = document.getElementById('soTrang')
+        const namXB = document.getElementById('namXB')
+
+        const errBaiBao = document.getElementById('errBaiBao')
+        const errNTG = document.getElementById('errNhomTG')
+        const errChiSo = document.getElementById('errChiSo')
+        const errSoTrang = document.getElementById('errSoTrang')
+        const errNamXB = document.getElementById('errNamXB')
+
+        let isTenBBValid = false;
+        let isTenNTGValid = false;
+        let isChiSoValid = false;
+        let isSoTrangValid = false;
+        let isNamXBValid = false;
+
+        const checkEnableBtn = ()=>{
+            if(isTenBBValid && isTenNTGValid && isChiSoValid && isSoTrangValid && isNamXBValid){
+                btnSubmit.removeAttribute('disabled')
+            }else{
+                btnSubmit.setAttribute('disabled', false)
+            }     
+        }
+
+        tenBaiBao.addEventListener('keyup',(e)=>{
+            console.log(e.target.value);
+            if(e.target.value == ""){
+                isTenBBValid = false;            
+            }else isTenBBValid = true;
+             if (!isTenBBValid) {
+                errBaiBao.innerText = "* Tên bài báo không được để rỗng!!!"
+                errBaiBao.classList.add('text-danger')
+            }else{
+                errBaiBao.innerText = ""
+                errBaiBao.classList.remove('text-danger')
+            }
+           checkEnableBtn()
+        })
+        tenNTG.addEventListener('keyup',(e)=>{
+            if(e.target.value == ""){
+                isTenNTGValid = false;            
+            }else isTenNTGValid = true;
+            if (!isTenNTGValid) {
+                errNTG.innerText = "* Tên nhà tác giả không được để rỗng!!!"
+                errNTG.classList.add('text-danger')
+            }else{
+                errNTG.innerText = ""
+                errNTG.classList.remove('text-danger')
+            }
+           checkEnableBtn()
+        })
+        chiSo.addEventListener('keyup',(e)=>{
+            if(e.target.value == ""){
+                isChiSoValid = false;            
+            }else isChiSoValid = true;
+             if (!isChiSoValid) {
+                errChiSo.innerText = "* Chỉ số không được để rỗng!!!"
+                errChiSo.classList.add('text-danger')
+            } else {
+                 errChiSo.innerText = ""
+                 errChiSo.classList.remove('text-danger')
+             }
+           checkEnableBtn()
+        })
+        soTrang.addEventListener('keyup',(e)=>{
+            if(e.target.value == "" || e.target.value < 1){
+                isSoTrangValid = false;            
+            }else isSoTrangValid = true;
+            if (!isSoTrangValid) {
+                errSoTrang.innerText = "* Số trang không được để rỗng!!!"
+                errSoTrang.classList.add('text-danger')
+            } else {
+                errSoTrang.innerText = ""
+                errSoTrang.classList.remove('text-danger')
+            }
+           checkEnableBtn()
+        })
+        namXB.addEventListener('keyup',(e)=>{
+            if(e.target.value == "" || e.target.value < 1){
+                isNamXBValid = false;            
+            }else isNamXBValid = true;
+             if (!isNamXBValid) {
+                errNamXB.innerText = "* Năm xuất bản không được để rỗng!!!"
+                errNamXB.classList.add('text-danger')
+            } else {
+                 errNamXB.innerText = ""
+                 errNamXB.classList.remove('text-danger')
+             }
+           checkEnableBtn()
+        })
+
+        
+    </script>
+
+</body>
+
+</html>
